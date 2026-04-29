@@ -25,8 +25,11 @@ router.register(r'activities', ActivityViewSet)
 router.register(r'leaderboard', LeaderboardViewSet)
 router.register(r'workouts', WorkoutViewSet)
 
+from django.views.generic import RedirectView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', api_root, name='api-root'),
-    path('', include(router.urls)),
+    path('', RedirectView.as_view(url='/api/', permanent=False)),
+    path('api/', api_root, name='api-root'),
+    path('api/', include(router.urls)),
 ]
